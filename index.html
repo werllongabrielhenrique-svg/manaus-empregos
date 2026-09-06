@@ -198,8 +198,8 @@ function buscarVagas() {
 async function carregarVagas(termoBusca = '') {
     try {
         const url = termoBusca 
-            ? `http://localhost:3000/buscar?q=${termoBusca}` 
-            : 'http://localhost:3000/vagas';
+    ? `/buscar?q=${termoBusca}` 
+    : '/vagas';
 
         const resposta = await fetch(url);
         const vagas = await resposta.json();
