@@ -22,14 +22,37 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
-// Testa a conexão do Pool
+// Testa a conexão do Pool e cria a tabela se não existir
 db.getConnection((erro, connection) => {
     if (erro) {
         console.error('Erro ao conectar com o banco:', erro);
         return;
     }
     console.log('Conectado ao MySQL com sucesso na nuvem!');
-    connection.release(); // Libera a conexão para o pool
+    
+    // Cria a tabela automaticamente caso seja um banco novo
+    const sqlCriarTabela = `
+        CREATE TABLE IF NOT EXISTS vagas (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            titulo VARCHAR(255) NOT NULL,
+            empresa VARCHAR(255) NOT NULL,
+            localizacao VARCHAR(255) DEFAULT 'Manaus, AM',
+            salario VARCHAR(255),
+            email_contato VARCHAR(255),
+            introducao TEXT,
+            requisitos TEXT,
+            atividades TEXT,
+            descricao TEXT,
+            data_publicacao DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    `;
+    
+    connection.query(sqlCriarTabela, (err) => {
+        if (err) console.error('Erro ao criar tabela:', err);
+        else console.log('Tabela "vagas" verificada/criada com sucesso!');
+    });
+
+    connection.release(); // Libera a conexão
 });
 
 // Rota para buscar vagas pela barra de pesquisa
