@@ -169,7 +169,7 @@
             };
 
             try {
-                const resposta = await fetch('/vagas')`, {
+                const resposta = await fetch('/vagas', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(dadosAtualizados)
@@ -191,7 +191,7 @@
             if (!confirm('Tem certeza que deseja excluir esta vaga do portal?')) return;
 
             try {
-                const resposta = await fetch(`http://localhost:3000/vagas/${id}`, { method: 'DELETE' });
+                const resposta = await fetch(`/vagas/${id}`, { method: 'DELETE' });
                 if (resposta.ok) {
                     alert('🗑️ Vaga excluída com sucesso!');
                     carregarVagasAdmin();
