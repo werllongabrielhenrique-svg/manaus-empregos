@@ -1,29 +1,35 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const path = require('path');
+const nodemailer = require('nodemailer');
 
 const app = express();
-const path = require('path');
 app.use(express.static(path.join(__dirname)));
 app.use(cors());
 app.use(express.json());
 
-// Conexão com o banco de dados MySQL (Suporta local e nuvem)
-const db = mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '1234', 
-    database: process.env.DB_NAME || 'portal_vagas',
-    port: process.env.DB_PORT || 3306
+// Conexão com o banco de dados MySQL usando POOL (Evita que o banco desconecte sozinho no Railway)
+const db = mysql.createPool({
+    // Lê as variáveis nativas do Railway (MYSQLHOST) ou as suas antigas (DB_HOST)
+    host: process.env.MYSQLHOST || process.env.DB_HOST || 'localhost',
+    user: process.env.MYSQLUSER || process.env.DB_USER || 'root',
+    password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD || '1234', 
+    database: process.env.MYSQLDATABASE || process.env.DB_NAME || 'portal_vagas',
+    port: process.env.MYSQLPORT || process.env.DB_PORT || 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-// Testa a conexão
-db.connect((erro) => {
+// Testa a conexão do Pool
+db.getConnection((erro, connection) => {
     if (erro) {
         console.error('Erro ao conectar com o banco:', erro);
         return;
     }
-    console.log('Conectado ao MySQL com sucesso!');
+    console.log('Conectado ao MySQL com sucesso na nuvem!');
+    connection.release(); // Libera a conexão para o pool
 });
 
 // Rota para buscar vagas pela barra de pesquisa
@@ -81,8 +87,6 @@ app.post('/vagas', (req, res) => {
         res.json({ mensagem: 'Vaga cadastrada com sucesso!', id: result.insertId });
     });
 });
-
-const nodemailer = require('nodemailer');
 
 // Configuração do transportador de e-mail (Usando o Gmail)
 const transporter = nodemailer.createTransport({
