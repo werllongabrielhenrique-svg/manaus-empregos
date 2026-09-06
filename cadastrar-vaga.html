@@ -107,7 +107,7 @@
             };
 
             try {
-                const resposta = await fetch('http://localhost:3000/solicitar-vaga', {
+                const resposta = await fetch('/vagas', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dadosVaga)
