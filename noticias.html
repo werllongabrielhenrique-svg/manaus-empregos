@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias de Emprego - Manaus Empregos</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; 
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: var(--text-color); }
+        
+        header { background-color: var(--primary-color); color: white; padding: 25px 0; text-align: center; }
+        
+        /* Menu de Navegação e Dropdown */
+.navbar { background-color: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); position: relative; }
+.navbar ul { max-width: 1200px; margin: 0 auto; display: flex; list-style: none; padding: 0 20px; }
+.navbar ul li { position: relative; }
+.navbar ul li a { display: block; padding: 15px 20px; color: #555; text-decoration: none; font-size: 15px; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap; transition: color 0.2s, border-bottom 0.2s; }
+.navbar ul li a:hover, .navbar ul li a.active { color: #0056b3; border-bottom-color: #0056b3; }
+
+/* Estilo da Caixinha do Dropdown */
+.navbar ul li.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    list-style: none;
+    min-width: 220px;
+    border-radius: 0 0 6px 6px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    z-index: 1000;
+}
+
+/* Mostra o menu quando o mouse passa por cima */
+.navbar ul li.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.navbar ul li.dropdown .dropdown-menu li {
+    width: 100%;
+}
+
+.navbar ul li.dropdown .dropdown-menu li a {
+    padding: 12px 20px;
+    color: #444;
+    border-bottom: none;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+.navbar ul li.dropdown .dropdown-menu li a:hover {
+    background-color: #f8f9fa;
+    color: #0056b3;
+    border-bottom: none;
+    padding-left: 25px; /* Efeito de deslocamento suave para o lado */
+}
+
+        .conteudo { max-width: 1200px; margin: 30px auto; display: flex; flex-direction: column; gap: 20px; padding: 0 20px; }
+        .news-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 6px solid var(--primary-color); }
+        .news-card h2 { color: var(--primary-color); margin-bottom: 10px; font-size: 20px; }
+        .news-date { font-size: 13px; color: #777; margin-bottom: 12px; display: block; }
+        .news-card p { line-height: 1.6; color: #555; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manaus Empregos Premium</h1>
+        <p>A ponte definitiva entre os melhores talentos e empresas do Amazonas.</p>
+    </header>
+
+    <nav class="navbar">
+    <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="dicas.html">Dicas de Emprego</a></li>
+        <li><a href="noticias.html">Notícias de Emprego</a></li>
+        <li><a href="politica.html">Política editorial</a></li>
+        
+        <!-- Menu Suspenso Institucional -->
+        <li class="dropdown">
+            <a href="#">Institucional ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="privacidade.html">Política de Privacidade</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="termos.html">Termos e Condições</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+    <div class="conteudo">
+        <div class="news-card">
+            <h2>Sine Manaus oferta centenas de vagas de emprego em diversas áreas</h2>
+            <span class="news-date">📅 Atualizado recentemente</span>
+            <p>O Sine Manaus continua disponibilizando oportunidades semanais com centenas de vagas de emprego voltadas para o comércio, logística e o setor operacional. As oportunidades incluem vagas para ajudantes de depósito, operadores de caixa, auxiliares de produção e cargos com foco no atendimento ao público. A recomendação para os candidatos é manter a documentação completa em dia para agilizar o atendimento.</p>
+        </div>
+
+        <div class="news-card">
+            <h2>Polo Industrial de Manaus mantém alta movimentação de vagas no setor fabril</h2>
+            <span class="news-date">📅 Atualizado recentemente</span>
+            <p>O Polo Industrial de Manaus (PIM) segue aquecido com vagas recorrentes para o setor de duas rodas, eletroeletrônicos e montagem. Fábricas de grande porte na região continuam abrindo seleções para analistas, técnicos industriais e operadores multifuncionais. Cursos profissionalizantes como TBO (Treinamento Básico Operacional) e leitura técnica continuam sendo diferenciais importantes para quem busca inserção imediata no chão de fábrica.</p>
+        </div>
+    </div>
+
+</body>
+</html>

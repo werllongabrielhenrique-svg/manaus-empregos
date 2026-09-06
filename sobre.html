@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Manaus Empregos</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; 
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: var(--text-color); }
+        
+        header { background-color: var(--primary-color); color: white; padding: 25px 0; text-align: center; }
+        
+        /* Menu de Navegação e Dropdown */
+        .navbar { background-color: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); position: relative; }
+        .navbar ul { max-width: 1200px; margin: 0 auto; display: flex; list-style: none; padding: 0 20px; }
+        .navbar ul li { position: relative; }
+        .navbar ul li a { display: block; padding: 15px 20px; color: #555; text-decoration: none; font-size: 15px; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap; transition: color 0.2s, border-bottom 0.2s; }
+        .navbar ul li a:hover, .navbar ul li a.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+
+        /* Estilo do Dropdown */
+        .navbar ul li.dropdown .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            list-style: none;
+            min-width: 220px;
+            border-radius: 0 0 6px 6px;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            z-index: 1000;
+        }
+        .navbar ul li.dropdown:hover .dropdown-menu { display: block; }
+        .navbar ul li.dropdown .dropdown-menu li { width: 100%; }
+        .navbar ul li.dropdown .dropdown-menu li a { padding: 12px 20px; color: #444; border-bottom: none; font-size: 14px; }
+        .navbar ul li.dropdown .dropdown-menu li a:hover { background-color: #f8f9fa; color: var(--primary-color); padding-left: 25px; }
+
+        /* Conteúdo da Página */
+        .conteudo { max-width: 900px; margin: 30px auto; background: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 24px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+        h3 { color: #444; margin-top: 25px; margin-bottom: 10px; font-size: 18px; }
+        p { line-height: 1.7; color: #555; margin-bottom: 15px; }
+        
+        .valores-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 25px; }
+        .valor-item { background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary-color); }
+        .valor-item h4 { color: var(--primary-color); margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manaus Empregos Premium</h1>
+        <p>A ponte definitiva entre os melhores talentos e empresas do Amazonas.</p>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="dicas.html">Dicas de Emprego</a></li>
+            <li><a href="noticias.html">Notícias de Emprego</a></li>
+            <li><a href="politica.html">Política editorial</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Institucional ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="privacidade.html">Política de Privacidade</a></li>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="termos.html">Termos e Condições</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="conteudo">
+        <h2>Sobre o Portal Manaus Empregos</h2>
+        <p>O <strong>Manaus Empregos</strong> nasceu com uma missão muito clara: revolucionar a forma como as oportunidades de trabalho chegam até os profissionais de Manaus e do Estado do Amazonas. Sabemos que a nossa região possui uma economia vibrante, impulsionada pelo comércio local, serviços e pelo Polo Industrial de Manaus (PIM).</p>
+
+        <p>Nosso objetivo é eliminar barreiras, oferecendo uma plataforma moderna, rápida, totalmente gratuita para os candidatos e estruturada para conectar quem quer trabalhar às empresas que precisam de talentos qualificados.</p>
+
+        <h3>Nossos Pilares</h3>
+        <div class="valores-box">
+            <div class="valor-item">
+                <h4>🎯 Foco Regional</h4>
+                <p>Conteúdo voltado inteiramente para as necessidades do mercado de trabalho amazonense.</p>
+            </div>
+            <div class="valor-item">
+                <h4>🛡️ Confiabilidade</h4>
+                <p>Curadoria rigorosa de vagas para proteger os candidatos contra anúncios falsos e golpes.</p>
+            </div>
+            <div class="valor-item">
+                <h4>⚡ Inovação Tecnológica</h4>
+                <p>Uma interface limpa, responsiva e otimizada para computadores e celulares.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Manaus Empregos</title>
+    <style>
+        :root { --primary-color: #0056b3; --danger-color: #dc3545; --success-color: #28a745; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: #333; }
+        
+        header { background-color: var(--primary-color); color: white; padding: 25px 0; text-align: center; }
+        .container { max-width: 1000px; margin: 30px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        h2 { color: var(--primary-color); margin-bottom: 20px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .btn { padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; border: none; font-size: 14px; }
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-success { background-color: var(--success-color); color: white; }
+        .btn-danger { background-color: var(--danger-color); color: white; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; font-size: 14px; }
+        th { background-color: #f8f9fa; color: #444; }
+        
+        /* Formulário de Edição (Modal simples) */
+        #modal-edicao { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-conteudo { background: white; padding: 30px; border-radius: 8px; width: 600px; max-height: 90vh; overflow-y: auto; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Painel do Administrador</h1>
+        <p>Gerenciamento e Edição de Vagas do Portal</p>
+    </header>
+
+    <div class="container">
+        <h2>
+            Vagas Publicadas no Portal
+            <a href="admin-cadastrar.html" class="btn btn-success">+ Publicar Direto</a>
+        </h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cargo / Título</th>
+                    <th>Empresa</th>
+                    <th>Local</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-vagas">
+                <tr><td colspan="5" style="text-align: center;">Carregando vagas...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="modal-edicao">
+        <div class="modal-conteudo">
+            <h3 style="margin-bottom: 15px; color: var(--primary-color);">Editar Vaga</h3>
+            <form id="form-editar" onsubmit="salvarEdicao(event)">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label>Título:</label>
+                    <input type="text" id="edit-titulo" required>
+                </div>
+                <div class="form-group">
+                    <label>Empresa:</label>
+                    <input type="text" id="edit-empresa" required>
+                </div>
+                <div class="form-group">
+                    <label>Localização:</label>
+                    <input type="text" id="edit-localizacao" required>
+                </div>
+                <div class="form-group">
+                    <label>Salário (R$):</label>
+                    <input type="number" step="0.01" id="edit-salario">
+                </div>
+                <div class="form-group">
+                    <label>E-mail de Contato:</label>
+                    <input type="email" id="edit-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Introdução:</label>
+                    <textarea id="edit-introducao" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Requisitos (separados por ;):</label>
+                    <textarea id="edit-requisitos" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Atividades (separados por ;):</label>
+                    <textarea id="edit-atividades" rows="3" required></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn btn-success" style="flex: 1;">Salvar Alterações</button>
+                    <button type="button" class="btn btn-danger" onclick="fecharModal()" style="flex: 1;">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function carregarVagasAdmin() {
+            try {
+                const resposta = await fetch('http://localhost:3000/vagas');
+                const vagas = await resposta.json();
+                const tbody = document.getElementById('tabela-vagas');
+
+                if (vagas.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Nenhuma vaga cadastrada.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = vagas.map(v => `
+                    <tr>
+                        <td>#${v.id}</td>
+                        <td><strong>${v.titulo}</strong></td>
+                        <td>${v.empresa}</td>
+                        <td>${v.localizacao}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="abrirEdicao(${v.id}, '${v.titulo}', '${v.empresa}', '${v.localizacao}', '${v.salario || ''}', '${v.email_contato || ''}', '${encodeURIComponent(v.introducao || '')}', '${encodeURIComponent(v.requisitos || '')}', '${encodeURIComponent(v.atividades || '')}')">Editar</button>
+                            <button class="btn btn-danger" onclick="excluirVaga(${v.id})">Excluir</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (erro) {
+                console.error('Erro:', erro);
+            }
+        }
+
+        function abrirEdicao(id, titulo, empresa, localizacao, salario, email, intro, req, ativ) {
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-titulo').value = titulo;
+            document.getElementById('edit-empresa').value = empresa;
+            document.getElementById('edit-localizacao').value = localizacao;
+            document.getElementById('edit-salario').value = salario;
+            document.getElementById('edit-email').value = email;
+            document.getElementById('edit-introducao').value = decodeURIComponent(intro);
+            document.getElementById('edit-requisitos').value = decodeURIComponent(req);
+            document.getElementById('edit-atividades').value = decodeURIComponent(ativ);
+            
+            document.getElementById('modal-edicao').style.display = 'flex';
+        }
+
+        function fecharModal() {
+            document.getElementById('modal-edicao').style.display = 'none';
+        }
+
+        async function salvarEdicao(event) {
+            event.preventDefault();
+            const id = document.getElementById('edit-id').value;
+
+            const dadosAtualizados = {
+                titulo: document.getElementById('edit-titulo').value,
+                empresa: document.getElementById('edit-empresa').value,
+                localizacao: document.getElementById('edit-localizacao').value,
+                salario: document.getElementById('edit-salario').value ? parseFloat(document.getElementById('edit-salario').value) : null,
+                email_contato: document.getElementById('edit-email').value,
+                introducao: document.getElementById('edit-introducao').value,
+                requisitos: document.getElementById('edit-requisitos').value,
+                atividades: document.getElementById('edit-atividades').value
+            };
+
+            try {
+                const resposta = await fetch(`http://localhost:3000/vagas/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosAtualizados)
+                });
+
+                if (resposta.ok) {
+                    alert('✅ Vaga atualizada com sucesso!');
+                    fecharModal();
+                    carregarVagasAdmin();
+                } else {
+                    alert('Erro ao atualizar vaga.');
+                }
+            } catch (erro) {
+                console.error('Erro:', erro);
+            }
+        }
+
+        async function excluirVaga(id) {
+            if (!confirm('Tem certeza que deseja excluir esta vaga do portal?')) return;
+
+            try {
+                const resposta = await fetch(`http://localhost:3000/vagas/${id}`, { method: 'DELETE' });
+                if (resposta.ok) {
+                    alert('🗑️ Vaga excluída com sucesso!');
+                    carregarVagasAdmin();
+                } else {
+                    alert('Erro ao excluir vaga.');
+                }
+            } catch (erro) {
+                console.error('Erro:', erro);
+            }
+        }
+
+        window.onload = carregarVagasAdmin;
+    </script>
+</body>
+</html>

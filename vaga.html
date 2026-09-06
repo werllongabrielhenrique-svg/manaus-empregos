@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Vaga - Manaus Empregos</title>
+    <style>
+        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f0f2f5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); }
+        
+        header { background-color: var(--primary-color); color: white; padding: 25px 0; text-align: center; }
+        
+        .navbar { background-color: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .navbar ul { max-width: 1200px; margin: 0 auto; display: flex; list-style: none; padding: 0 20px; }
+        .navbar ul li a { display: block; padding: 15px 20px; color: #555; text-decoration: none; font-size: 15px; font-weight: 500; }
+        .navbar ul li a:hover { color: var(--primary-color); }
+
+        .container { max-width: 1100px; margin: 30px auto; display: grid; grid-template-columns: 2.5fr 1fr; gap: 30px; padding: 0 20px; }
+        
+        /* Artigo Editorial */
+        .artigo-vaga { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .artigo-titulo { font-size: 32px; color: #111; margin-bottom: 15px; line-height: 1.3; }
+        .artigo-meta { font-size: 14px; color: #666; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        
+        .artigo-secao { font-size: 17px; line-height: 1.8; color: #444; margin-bottom: 25px; }
+        .artigo-secao h3 { color: var(--primary-color); margin-bottom: 12px; font-size: 20px; }
+        .artigo-secao ul { margin-left: 20px; margin-top: 10px; }
+        .artigo-secao ul li { margin-bottom: 8px; }
+
+        /* Caixa de Envio de Currículo */
+        .caixa-candidatura { background-color: #eef6fc; border: 2px dashed var(--primary-color); padding: 30px; border-radius: 8px; text-align: center; margin: 30px 0; }
+        .caixa-candidatura h3 { color: var(--primary-color); margin-bottom: 10px; }
+        .email-destaque { font-size: 20px; font-weight: bold; color: #d35400; margin: 15px 0; display: inline-block; background: white; padding: 10px 20px; border-radius: 6px; border: 1px solid #ddd; }
+
+        /* Resumo Final da Vaga */
+        .resumo-box { background: #f8f9fa; border-left: 5px solid var(--primary-color); padding: 20px; border-radius: 6px; margin-top: 30px; }
+        .resumo-box h4 { margin-bottom: 10px; color: #333; }
+        .resumo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 14px; color: #555; }
+
+        /* Aviso de Segurança */
+        .aviso-seguranca { background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 6px; font-size: 13px; margin-top: 20px; line-height: 1.5; }
+
+        /* Sidebar */
+        .sidebar { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); height: fit-content; }
+        .ad-sidebar { background-color: #ffeaa7; border: 2px dashed #fdcb6e; color: #b28900; text-align: center; height: 250px; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 8px; font-size: 14px; }
+
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .resumo-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manaus Empregos Premium</h1>
+        <p>O seu portal oficial de oportunidades no Amazonas.</p>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="dicas.html">Dicas de Emprego</a></li>
+            <li><a href="noticias.html">Notícias</a></li>
+            <li><a href="cadastrar-vaga.html">Anunciar Vaga</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Coluna Principal (Matéria Editorial) -->
+        <main id="conteudo-artigo">
+            <div style="text-align: center; padding: 50px; background: white; border-radius: 10px;">
+                <h3>⏳ Carregando oportunidade...</h3>
+            </div>
+        </main>
+
+        <!-- Coluna Lateral -->
+        <aside>
+            <div class="sidebar">
+                <div class="ad-sidebar">
+                    [ANÚNCIO LATERAL 300x250]<br>Espaço Publicitário
+                </div>
+                <h3 style="margin-top: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; font-size: 16px;">Dica de Ouro</h3>
+                <p style="font-size: 13px; color: #555; margin-top: 10px; line-height: 1.6;">Sempre envie seu currículo em formato PDF e coloque o nome exato da vaga no assunto do e-mail.</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        async function carregarArtigoVaga() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const idDaVaga = urlParams.get('id');
+
+            if (!idDaVaga) {
+                document.getElementById('conteudo-artigo').innerHTML = '<div class="artigo-vaga"><h2>⚠️ Nenhuma vaga selecionada.</h2><a href="index.html">Voltar ao início</a></div>';
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`http://localhost:3000/vagas/${idDaVaga}`);
+                
+                if (resposta.status === 404) {
+                    document.getElementById('conteudo-vaga').innerHTML = '<div class="artigo-vaga"><h2>⚠️ Matéria não encontrada ou expirada.</h2><a href="index.html">Voltar</a></div>';
+                    return;
+                }
+
+                const vaga = await resposta.json();
+                const salario = vaga.salario ? `R$ ${parseFloat(vaga.salario).toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : 'A combinar';
+                const dataFormatada = new Date(vaga.data_publicacao).toLocaleDateString('pt-BR');
+
+                // Transforma o texto de requisitos em lista se houver ponto e vírgula
+                const listaRequisitos = vaga.requisitos 
+                    ? vaga.requisitos.split(';').map(item => `<li>${item.trim()}</li>`).join('') 
+                    : '<li>Atender aos critérios da empresa.</li>';
+
+                const listaAtividades = vaga.atividades 
+                    ? vaga.atividades.split(';').map(item => `<li>${item.trim()}</li>`).join('') 
+                    : '<li>Auxiliar nas demandas do setor.</li>';
+
+                const htmlArtigo = `
+                    <article class="artigo-vaga">
+                        <h1 class="artigo-titulo">${vaga.titulo}</h1>
+                        <div class="artigo-meta">
+                            Por <strong>Redação Manaus Empregos</strong> • Publicado em ${dataFormatada} • Empresa: <strong>${vaga.empresa}</strong>
+                        </div>
+
+                        <div class="artigo-secao">
+                            <p>${vaga.introducao || vaga.descricao}</p>
+                        </div>
+
+                        <div class="artigo-secao">
+                            <h3>Requisitos para participar</h3>
+                            <p>Para concorrer a esta oportunidade, o candidato deve atender aos seguintes critérios informados:</p>
+                            <ul>
+                                ${listaRequisitos}
+                            </ul>
+                        </div>
+
+                        <div class="artigo-secao">
+                            <h3>Atividades do Cargo</h3>
+                            <p>O profissional selecionado irá desempenhar as seguintes funções na empresa:</p>
+                            <ul>
+                                ${listaAtividades}
+                            </ul>
+                        </div>
+
+                        <div class="caixa-candidatura">
+                            <h3>Como enviar o currículo</h3>
+                            <p>Os interessados devem preparar um currículo atualizado e enviar diretamente para o e-mail oficial da empresa informado abaixo:</p>
+                            
+                            <div class="email-destaque">📧 ${vaga.email_contato || 'selecao@' + vaga.empresa.replace(/\s+/g, '').toLowerCase() + '.com.br'}</div>
+                            
+                            <p style="font-size: 13px; color: #666;">💡 Dica: No assunto do e-mail, informe o nome exato do cargo pretendido.</p>
+                        </div>
+
+                        <div class="resumo-box">
+                            <h4>📋 Resumo da Vaga</h4>
+                            <div class="resumo-grid">
+                                <div><strong>Cargo:</strong> ${vaga.titulo}</div>
+                                <div><strong>Empresa:</strong> ${vaga.empresa}</div>
+                                <div><strong>Local:</strong> ${vaga.localizacao}</div>
+                                <div><strong>Salário:</strong> ${salario}</div>
+                            </div>
+                        </div>
+
+                        <div class="aviso-seguranca">
+                            <strong>⚠️ Aviso Importante:</strong> Este portal apenas divulga oportunidades de emprego de forma gratuita. Não cobramos nenhuma taxa para participação em processos seletivos e não nos responsabilizamos por contratações.
+                        </div>
+                    </article>
+                `;
+
+                document.getElementById('conteudo-artigo').innerHTML = htmlArtigo;
+                document.title = `${vaga.titulo} - Manaus Empregos`;
+
+            } catch (erro) {
+                console.error('Erro:', erro);
+                document.getElementById('conteudo-artigo').innerHTML = '<div class="artigo-vaga"><h2>⚠️ Erro ao carregar o conteúdo da vaga.</h2></div>';
+            }
+        }
+
+        window.onload = carregarArtigoVaga;
+    </script>
+</body>
+</html>

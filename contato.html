@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Manaus Empregos</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; 
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: var(--text-color); }
+        
+        header { background-color: var(--primary-color); color: white; padding: 25px 0; text-align: center; }
+        
+        /* Menu de Navegação e Dropdown */
+        .navbar { background-color: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); position: relative; }
+        .navbar ul { max-width: 1200px; margin: 0 auto; display: flex; list-style: none; padding: 0 20px; }
+        .navbar ul li { position: relative; }
+        .navbar ul li a { display: block; padding: 15px 20px; color: #555; text-decoration: none; font-size: 15px; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap; transition: color 0.2s, border-bottom 0.2s; }
+        .navbar ul li a:hover, .navbar ul li a.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+
+        /* Estilo do Dropdown */
+        .navbar ul li.dropdown .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            list-style: none;
+            min-width: 220px;
+            border-radius: 0 0 6px 6px;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            z-index: 1000;
+        }
+        .navbar ul li.dropdown:hover .dropdown-menu { display: block; }
+        .navbar ul li.dropdown .dropdown-menu li { width: 100%; }
+        .navbar ul li.dropdown .dropdown-menu li a { padding: 12px 20px; color: #444; border-bottom: none; font-size: 14px; }
+        .navbar ul li.dropdown .dropdown-menu li a:hover { background-color: #f8f9fa; color: var(--primary-color); padding-left: 25px; }
+
+        /* Conteúdo do Formulário */
+        .conteudo { max-width: 800px; margin: 30px auto; background: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { color: var(--primary-color); margin-bottom: 20px; font-size: 24px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+        p { line-height: 1.7; color: #555; margin-bottom: 20px; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary-color); outline: none; }
+        
+        .submit-btn { background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; width: 100%; }
+        .submit-btn:hover { background-color: #004494; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manaus Empregos Premium</h1>
+        <p>A ponte definitiva entre os melhores talentos e empresas do Amazonas.</p>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="dicas.html">Dicas de Emprego</a></li>
+            <li><a href="noticias.html">Notícias de Emprego</a></li>
+            <li><a href="politica.html">Política editorial</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Institucional ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="privacidade.html">Política de Privacidade</a></li>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="termos.html">Termos e Condições</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="conteudo">
+        <h2>Fale Conosco</h2>
+        <p>Tem alguma dúvida, sugestão ou é representante de uma empresa querendo anunciar vagas em Manaus? Preencha o formulário abaixo e entraremos em contato.</p>
+
+        <!-- Adicionado id="form-contato" e alterado o onsubmit para a função de envio -->
+        <form id="form-contato" onsubmit="enviarMensagem(event)">
+            <div class="form-group">
+                <label for="nome">Seu Nome / Nome da Empresa</label>
+                <input type="text" id="nome" required placeholder="Digite seu nome completo ou da empresa">
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail para Contato</label>
+                <input type="email" id="email" required placeholder="seu-email@exemplo.com">
+            </div>
+
+            <div class="form-group">
+                <label for="assunto">Assunto</label>
+                <select id="assunto">
+                    <option value="duvida">Dúvida Geral</option>
+                    <option value="anunciar">Anunciar Vagas / Parceria</option>
+                    <option value="sugestao">Sugestão ou Reclamação</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Enviar Mensagem</button>
+        </form>
+    </div>
+
+    <!-- Script que envia os dados para o backend -->
+    <script>
+        async function enviarMensagem(event) {
+            event.preventDefault(); // Evita recarregar a página
+
+            const dadosContato = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                assunto: document.getElementById('assunto').value,
+                mensagem: document.getElementById('mensagem').value
+            };
+
+            try {
+                const resposta = await fetch('http://localhost:3000/contato', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosContato)
+                });
+
+                const resultado = await resposta.json();
+
+                if (resposta.ok) {
+                    alert('✅ Mensagem enviada com sucesso! Ela já foi encaminhada para o e-mail do administrador.');
+                    document.getElementById('form-contato').reset(); // Limpa o formulário
+                } else {
+                    alert('⚠️ Erro ao enviar: ' + resultado.erro);
+                }
+
+            } catch (erro) {
+                console.error('Erro de conexão:', erro);
+                alert('⚠️ Erro ao conectar com o servidor de e-mail.');
+            }
+        }
+    </script>
+</body>
+</html>

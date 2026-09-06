@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manaus Empregos - O Seu Portal de Vagas</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; 
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --ad-bg: #ffeaa7; 
+            --ad-border: #fdcb6e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: var(--text-color); }
+        
+        /* Cabeçalho */
+        header { background-color: var(--primary-color); color: white; padding: 25px 0; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        header h1 { font-size: 32px; letter-spacing: 1px; }
+        header p { font-size: 16px; margin-top: 8px; opacity: 0.9; }
+
+        /* Menu de Navegação e Dropdown */
+.navbar { background-color: white; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); position: relative; }
+.navbar ul { max-width: 1200px; margin: 0 auto; display: flex; list-style: none; padding: 0 20px; }
+.navbar ul li { position: relative; }
+.navbar ul li a { display: block; padding: 15px 20px; color: #555; text-decoration: none; font-size: 15px; font-weight: 500; border-bottom: 3px solid transparent; white-space: nowrap; transition: color 0.2s, border-bottom 0.2s; }
+.navbar ul li a:hover, .navbar ul li a.active { color: #0056b3; border-bottom-color: #0056b3; }
+
+/* Estilo da Caixinha do Dropdown */
+.navbar ul li.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    list-style: none;
+    min-width: 220px;
+    border-radius: 0 0 6px 6px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    z-index: 1000;
+}
+
+/* Mostra o menu quando o mouse passa por cima */
+.navbar ul li.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.navbar ul li.dropdown .dropdown-menu li {
+    width: 100%;
+}
+
+.navbar ul li.dropdown .dropdown-menu li a {
+    padding: 12px 20px;
+    color: #444;
+    border-bottom: none;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+.navbar ul li.dropdown .dropdown-menu li a:hover {
+    background-color: #f8f9fa;
+    color: #0056b3;
+    border-bottom: none;
+    padding-left: 25px; /* Efeito de deslocamento suave para o lado */
+}
+
+        /* Barra de Busca */
+        .search-section { background-color: white; padding: 30px 20px; text-align: center; border-bottom: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .search-section input { padding: 15px; width: 60%; max-width: 500px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 16px; transition: border 0.3s; }
+        .search-section input:focus { border-color: var(--primary-color); outline: none; }
+        .search-section button { padding: 15px 30px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-left: 10px; font-weight: bold; transition: background 0.3s; }
+        .search-section button:hover { background-color: #218838; }
+
+        /* Estrutura Principal */
+        .container { max-width: 1200px; margin: 30px auto; display: grid; grid-template-columns: 3fr 1fr; gap: 30px; padding: 0 20px; }
+        
+        /* Espaços de Anúncios */
+        .ad-space { background-color: var(--ad-bg); border: 2px dashed var(--ad-border); color: #b28900; text-align: center; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 20px; border-radius: 8px; font-size: 14px; padding: 10px; }
+        .ad-leaderboard { width: 100%; height: 90px; margin: 20px auto; max-width: 1200px; } 
+        .ad-sidebar { width: 100%; height: 250px; } 
+        .ad-infeed { width: 100%; height: 120px; margin-top: 15px; } 
+
+        /* Feed de Vagas */
+        .job-feed { display: flex; flex-direction: column; gap: 20px; }
+        .job-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 6px solid var(--primary-color); transition: transform 0.2s, box-shadow 0.2s; }
+        .job-card:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .job-title { font-size: 22px; color: var(--primary-color); }
+        .job-company { font-weight: 600; color: #555; background: #f0f2f5; padding: 5px 10px; border-radius: 4px; font-size: 14px; }
+        .job-meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 15px; color: #666; margin-bottom: 15px; }
+        .job-meta span { display: flex; align-items: center; gap: 6px; }
+        .job-desc { margin-bottom: 20px; font-size: 16px; line-height: 1.6; color: #444; }
+        .apply-btn { background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; transition: background 0.3s; }
+        .apply-btn:hover { background-color: #004494; }
+
+        /* Barra Lateral */
+        .sidebar { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); height: fit-content; }
+        .sidebar h3 { margin-bottom: 20px; font-size: 18px; border-bottom: 3px solid var(--primary-color); padding-bottom: 8px; display: inline-block; color: #333; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li { margin-bottom: 12px; }
+        .sidebar ul li a { color: #555; text-decoration: none; font-size: 15px; display: block; padding: 5px 0; transition: color 0.2s; }
+        .sidebar ul li a:hover { color: var(--primary-color); font-weight: 600; padding-left: 5px; }
+
+        /* Celulares */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .search-section input { width: 100%; margin-bottom: 15px; }
+            .search-section button { width: 100%; margin-left: 0; }
+            .job-header { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manaus Empregos Premium</h1>
+        <p>A ponte definitiva entre os melhores talentos e empresas do Amazonas.</p>
+    </header>
+
+    <nav class="navbar">
+    <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="dicas.html">Dicas de Emprego</a></li>
+        <li><a href="noticias.html">Notícias de Emprego</a></li>
+        <li><a href="politica.html">Política editorial</a></li>
+        
+        <!-- Menu Suspenso Institucional -->
+        <li class="dropdown">
+            <a href="#">Institucional ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="privacidade.html">Política de Privacidade</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="termos.html">Termos e Condições</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+    <div class="search-section">
+        <input type="text" id="search-input" placeholder="Digite o cargo (ex: Desenvolvedor, TI, Vendedor)...">
+        <button onclick="buscarVagas()">Buscar Vagas</button>
+    </div>
+
+    <!-- ANÚNCIO 1 -->
+    <div class="ad-space ad-leaderboard">
+        [ESPAÇO PUBLICITÁRIO 728x90] - Ideal para banners de Faculdades, Cursos Técnicos ou AdSense.
+    </div>
+
+    <div class="container">
+        <!-- Coluna Esquerda: Vagas -->
+        <main>
+            <div class="job-feed" id="lista-vagas">
+                <div style="text-align: center; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h3>⏳ Conectando ao Banco de Dados...</h3>
+                    <p style="margin-top: 10px; color: #666;">Buscando as últimas oportunidades.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Coluna Direita: Sidebar -->
+        <aside>
+            <!-- ANÚNCIO 2 -->
+            <div class="ad-space ad-sidebar">
+                [ANÚNCIO LATERAL 300x250]<br><br>Venda este espaço por mês para recrutadoras de Manaus.
+            </div>
+
+            <div class="sidebar" style="margin-top: 20px;">
+                <h3>Vagas por Categoria</h3>
+                <ul>
+                    <li><a href="#">💻 Tecnologia da Informação</a></li>
+                    <li><a href="#">📊 Administração e Negócios</a></li>
+                    <li><a href="#">🏥 Saúde e Enfermagem</a></li>
+                    <li><a href="#">🛍️ Comércio e Varejo</a></li>
+                    <li><a href="#">👷 Indústria e Produção</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar" style="margin-top: 20px; background: #e3f2fd; border: 1px solid #bbdefb;">
+    <h3 style="border-bottom-color: #1976d2; color: #1976d2;">Para Empresas</h3>
+    <p style="font-size: 14px; margin-bottom: 15px; color: #333;">Divulgue suas vagas e encontre os melhores profissionais da região.</p>
+    <a href="cadastrar-vaga.html" style="display: block; text-align: center; text-decoration: none; width: 100%; background: #1976d2; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s;">Anunciar Vaga</a>
+</div>
+        </aside>
+    </div>
+
+    <script>
+       // Função ativada ao clicar no botão "Buscar Vagas"
+function buscarVagas() {
+    const termo = document.getElementById('search-input').value;
+    carregarVagas(termo);
+}
+
+// A função principal agora aceita uma palavra para pesquisar
+async function carregarVagas(termoBusca = '') {
+    try {
+        // Se o usuário digitou algo, usa a rota /buscar. Se não, usa a /vagas normal.
+        const url = termoBusca 
+            ? `http://localhost:3000/buscar?q=${termoBusca}` 
+            : 'http://localhost:3000/vagas';
+
+        const resposta = await fetch(url);
+        const vagas = await resposta.json();
+        
+        const divLista = document.getElementById('lista-vagas');
+        divLista.innerHTML = ''; 
+
+        // Se o banco não encontrar nenhuma vaga com aquele nome
+        if(vagas.length === 0) {
+            divLista.innerHTML = `
+                <div style="padding: 40px; text-align: center; background: white; border-radius: 10px;">
+                    <h3>Nenhuma vaga encontrada para "${termoBusca}" 😔</h3>
+                    <p style="margin-top: 10px; color: #666;">Tente buscar por outro termo como "Desenvolvedor" ou "Administrativo".</p>
+                    <button onclick="document.getElementById('search-input').value=''; carregarVagas('')" style="margin-top: 15px; padding: 10px 20px; cursor: pointer; border: none; background: #0056b3; color: white; border-radius: 6px;">Ver todas as vagas</button>
+                </div>
+            `;
+            return;
+        }
+
+        vagas.forEach((vaga, index) => {
+            const salario = vaga.salario ? `R$ ${parseFloat(vaga.salario).toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : 'A combinar';
+
+            const vagaHTML = `
+                <div class="job-card">
+                    <div class="job-header">
+                        <h2 class="job-title">${vaga.titulo}</h2>
+                        <span class="job-company">${vaga.empresa}</span>
+                    </div>
+                    <div class="job-meta">
+                        <span>📍 ${vaga.localizacao || 'Manaus, AM'}</span>
+                        <span>💰 ${salario}</span>
+                        <span>📅 Publicado em: ${new Date(vaga.data_publicacao).toLocaleDateString('pt-BR')}</span>
+                    </div>
+                    <p class="job-desc">${vaga.descricao}</p>
+                    <a href="vaga.html?id=${vaga.id}" class="apply-btn">Ver Detalhes e Candidatar-se</a>
+                </div>
+            `;
+            divLista.innerHTML += vagaHTML;
+
+            // ANÚNCIO 3 (Intercalado no feed)
+            if ((index + 1) % 2 === 0 && index !== vagas.length - 1) {
+                const adInfeed = `
+                    <div class="ad-space ad-infeed">
+                        [ANÚNCIO NO FEED]<br>Coloque aqui um link de afiliado (Ex: Cursos, Preparatório para Concursos).
+                    </div>
+                `;
+                divLista.innerHTML += adInfeed;
+            }
+        });
+
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+        document.getElementById('lista-vagas').innerHTML = `
+            <div style="background: #ffebee; color: #c62828; padding: 25px; border-radius: 8px; text-align: center; border: 1px solid #ef9a9a;">
+                <h3 style="margin-bottom: 10px;">⚠️ Servidor Offline</h3>
+                <p>O visual (Frontend) está pronto, mas o servidor Node.js precisa estar ligado.</p>
+            </div>
+        `;
+    }
+}
+
+// Quando a página carrega pela primeira vez, busca todas as vagas
+window.onload = () => carregarVagas();
+    </script>
+</body>
+</html>
