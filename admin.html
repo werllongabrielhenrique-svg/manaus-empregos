@@ -109,7 +109,7 @@
     <script>
         async function carregarVagasAdmin() {
             try {
-                const resposta = await fetch('http://localhost:3000/vagas');
+                const resposta = await fetch('/vagas');
                 const vagas = await resposta.json();
                 const tbody = document.getElementById('tabela-vagas');
 
@@ -169,7 +169,7 @@
             };
 
             try {
-                const resposta = await fetch(`http://localhost:3000/vagas/${id}`, {
+                const resposta = await fetch('/vagas')`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(dadosAtualizados)
