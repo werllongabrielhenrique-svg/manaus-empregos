@@ -95,7 +95,7 @@
             }
 
             try {
-                const resposta = await fetch(`http://localhost:3000/vagas/${idDaVaga}`);
+                const resposta = await fetch(`/vagas/${idDaVaga}`);
                 
                 if (resposta.status === 404) {
                     document.getElementById('conteudo-vaga').innerHTML = '<div class="artigo-vaga"><h2>⚠️ Matéria não encontrada ou expirada.</h2><a href="index.html">Voltar</a></div>';
