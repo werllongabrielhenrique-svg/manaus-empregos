@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serviço de Currículo Profissional - Manaus Empregos</title>
+    <title>Serviço de Currículo Premium - Manaus Empregos</title>
     <style>
         :root {
             --primary-color: #0056b3; 
@@ -18,49 +18,101 @@
         
         .aviso-pago { background-color: #e3f2fd; border-left: 4px solid var(--primary-color); padding: 15px; margin-bottom: 25px; border-radius: 4px; font-weight: 500; color: #0056b3; }
 
+        .sessao-titulo { margin-top: 25px; margin-bottom: 15px; padding-bottom: 5px; border-bottom: 2px solid var(--primary-color); color: var(--primary-color); font-size: 18px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .form-group { margin-bottom: 15px; }
-        label { font-weight: bold; display: block; margin-bottom: 5px; color: #444; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; color: #444; font-size: 14px; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
         input:focus, textarea:focus { border-color: var(--primary-color); outline: none; }
         
-        button { width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        button { width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.3s; }
         button:hover { background-color: #128C7E; }
 
         .voltar { display: block; text-align: center; margin-top: 20px; color: var(--primary-color); text-decoration: none; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container-cv">
-        <h1>Currículo Profissional</h1>
-        <p class="descricao">Aumente suas chances de ser contratado com um currículo formatado no padrão exigido pelas empresas.</p>
+        <h1>Currículo Profissional Premium</h1>
+        <p class="descricao">Garanta uma apresentação impecável para as empresas com nosso serviço de formatação.</p>
         
         <div class="aviso-pago">
-            💡 <strong>Como funciona:</strong> Este é um serviço pago. Você preenche seus dados básicos abaixo, o sistema enviará as informações para o nosso WhatsApp, e nós montaremos o seu currículo em PDF com design profissional!
+            💡 <strong>Como funciona:</strong> Preencha os detalhes abaixo da forma mais completa possível. O sistema enviará tudo para o nosso WhatsApp, onde informaremos o valor e entregaremos seu currículo em PDF pronto para aprovação!
         </div>
         
+        <!-- DADOS PESSOAIS -->
+        <h3 class="sessao-titulo">1. Dados Pessoais e Contato</h3>
         <div class="form-group">
-            <label>Qual o seu Nome Completo?</label>
-            <input type="text" id="nome" placeholder="Ex: João da Silva" required>
+            <label>Nome Completo:</label>
+            <input type="text" id="nome" placeholder="Ex: Werllon Gabriel Henrique Alfaia" required>
         </div>
-        <div class="form-group">
-            <label>Seu Telefone / WhatsApp:</label>
-            <input type="text" id="telefone" placeholder="(92) 90000-0000" required>
-        </div>
-        <div class="form-group">
-            <label>Qual cargo você procura? (Objetivo):</label>
-            <input type="text" id="objetivo" placeholder="Ex: Auxiliar Administrativo, Vendedor...">
-        </div>
-        <div class="form-group">
-            <label>Fale um pouco sobre suas experiências anteriores:</label>
-            <textarea id="experiencia" rows="4" placeholder="Onde você já trabalhou? O que fazia?"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Escolaridade / Cursos:</label>
-            <textarea id="formacao" rows="3" placeholder="Até que ano estudou? Fez algum curso?"></textarea>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Cidade - Estado:</label>
+                <input type="text" id="cidade" placeholder="Ex: Manaus - AM">
+            </div>
+            <div class="form-group">
+                <label>Estado Civil e Idade:</label>
+                <input type="text" id="idade" placeholder="Ex: Solteiro, 18 anos">
+            </div>
         </div>
 
-        <!-- Botão com a cor do WhatsApp -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Telefone / WhatsApp:</label>
+                <input type="text" id="telefone" placeholder="Ex: (97) 90000-0000" required>
+            </div>
+            <div class="form-group">
+                <label>E-mail:</label>
+                <input type="email" id="email" placeholder="seuemail@email.com">
+            </div>
+        </div>
+
+        <!-- OBJETIVO E RESUMO -->
+        <h3 class="sessao-titulo">2. Perfil Profissional</h3>
+        <div class="form-group">
+            <label>Objetivo Profissional (Qual cargo deseja?):</label>
+            <input type="text" id="objetivo" placeholder="Ex: Assistente de T.I, Auxiliar Administrativo...">
+        </div>
+        <div class="form-group">
+            <label>Resumo Profissional (Fale sobre você, sua área e conhecimentos):</label>
+            <textarea id="resumo" rows="4" placeholder="Ex: Profissional com experiência em manutenção de PCs, instalação de softwares... Busco uma vaga para aplicar meus conhecimentos..."></textarea>
+        </div>
+
+        <!-- HISTÓRICO -->
+        <h3 class="sessao-titulo">3. Histórico e Experiência</h3>
+        <div class="form-group">
+            <label>Formação Acadêmica (Faculdade, Cursos Técnicos ou Ensino Médio):</label>
+            <textarea id="formacao" rows="3" placeholder="Ex: Graduando em Análise de Sistemas - Senac SP (2026) / Técnico em TI - IFAM (Concluído em 2025)"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Experiências Profissionais (Empresas, Cargos, Período e Atividades):</label>
+            <textarea id="experiencia" rows="5" placeholder="Ex: Empresa X - Cargo: Estagiário Técnico (Março 2025 a Outubro 2025). Atividades: Manutenção de hardware, suporte ao usuário..."></textarea>
+        </div>
+
+        <!-- EXTRAS -->
+        <h3 class="sessao-titulo">4. Qualificações e Extras</h3>
+        <div class="form-group">
+            <label>Cursos Complementares (Nome do Curso, Instituição e Carga Horária):</label>
+            <textarea id="cursos" rows="3" placeholder="Ex: Montagem e Manutenção de Hardware - 300 horas..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Principais Qualidades / Características (Seus pontos fortes):</label>
+            <textarea id="qualidades" rows="3" placeholder="Ex: Atenção a detalhes, perfil analítico, boa comunicação interpessoal, proatividade..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Observações Finais (Opcional):</label>
+            <input type="text" id="observacoes" placeholder="Ex: Disponibilidade para início imediato, CNH AB...">
+        </div>
+
+        <!-- Botão WhatsApp -->
         <button onclick="enviarParaWhatsApp()">
             📱 Solicitar Currículo pelo WhatsApp
         </button>
@@ -70,38 +122,59 @@
 
     <script>
         function enviarParaWhatsApp() {
-            // 1. Pega os valores preenchidos
+            // Captura todos os dados
             const nome = document.getElementById('nome').value;
+            const cidade = document.getElementById('cidade').value || 'Não informado';
+            const idade = document.getElementById('idade').value || 'Não informado';
             const telefone = document.getElementById('telefone').value;
-            const objetivo = document.getElementById('objetivo').value;
-            const experiencia = document.getElementById('experiencia').value;
-            const formacao = document.getElementById('formacao').value;
+            const email = document.getElementById('email').value || 'Não informado';
+            const objetivo = document.getElementById('objetivo').value || 'Não informado';
+            const resumo = document.getElementById('resumo').value || 'Não informado';
+            const formacao = document.getElementById('formacao').value || 'Não informado';
+            const experiencia = document.getElementById('experiencia').value || 'Não informado';
+            const cursos = document.getElementById('cursos').value || 'Não informado';
+            const qualidades = document.getElementById('qualidades').value || 'Não informado';
+            const observacoes = document.getElementById('observacoes').value || 'Não informado';
 
-            // Validação simples para exigir o nome
-            if(!nome) {
-                alert("Por favor, preencha pelo menos o seu nome!");
+            // Validação simples do nome e telefone
+            if(!nome || !telefone) {
+                alert("Por favor, preencha pelo menos o seu nome e telefone!");
                 return;
             }
 
-            // 2. Monta a mensagem formatada para o WhatsApp
-            const mensagem = `Olá, Manaus Empregos! Gostaria de contratar a criação do meu currículo.\n\n` +
-                             `*Meus Dados:*\n` +
-                             `*Nome:* ${nome}\n` +
-                             `*Contato:* ${telefone}\n` +
-                             `*Objetivo:* ${objetivo}\n\n` +
-                             `*Experiência:*\n${experiencia}\n\n` +
-                             `*Formação:*\n${formacao}\n\n` +
-                             `Aguardo o valor e as orientações para o pagamento via Pix!`;
+            // Monta a mensagem estruturada com Markdown (negrito do WhatsApp)
+            let mensagem = `Olá, Manaus Empregos! Gostaria de encomendar a criação do meu currículo profissional.\n\n`;
+            mensagem += `📋 *DADOS PESSOAIS*\n`;
+            mensagem += `*Nome:* ${nome}\n`;
+            mensagem += `*Localidade:* ${cidade}\n`;
+            mensagem += `*Estado Civil/Idade:* ${idade}\n`;
+            mensagem += `*Contato:* ${telefone} \vert{}${email}\n\n`;
+            
+            mensagem += `🎯 *OBJETIVO PROFISSIONAL*\n${objetivo}\n\n`;
+            
+            mensagem += `📝 *RESUMO PROFISSIONAL*\n${resumo}\n\n`;
+            
+            mensagem += `🎓 *FORMAÇÃO*\n${formacao}\n\n`;
+            
+            mensagem += `💼 *EXPERIÊNCIAS PROFISSIONAIS*\n${experiencia}\n\n`;
+            
+            mensagem += `📚 *CURSOS COMPLEMENTARES*\n${cursos}\n\n`;
+            
+            mensagem += `⭐ *QUALIDADES E CARACTERÍSTICAS*\n${qualidades}\n\n`;
+            
+            if(document.getElementById('observacoes').value) {
+                mensagem += `📌 *OBSERVAÇÕES FINAIS*\n${observacoes}\n\n`;
+            }
 
-            // 3. SEU NÚMERO DE WHATSAPP (Substitua pelos seus números)
-            // Formato: 55 + DDD + Número (Sem espaços ou traços)
-            // Exemplo: 5592999999999
+            mensagem += `💳 Aguardo o valor e as instruções para efetuar o pagamento!`;
+
+            // SEU NÚMERO DE WHATSAPP (Lembre de alterar aqui!)
             const seuNumeroWhatsApp = "5597984474188"; 
 
-            // 4. Cria o link especial do WhatsApp e redireciona o usuário
+            // Codifica a mensagem para link
             const linkWhatsApp = `https://wa.me/${seuNumeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
             
-            // Abre o WhatsApp em uma nova aba
+            // Abre o WhatsApp
             window.open(linkWhatsApp, '_blank');
         }
     </script>
