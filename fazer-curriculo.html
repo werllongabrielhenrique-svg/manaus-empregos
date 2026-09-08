@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviço de Currículo Profissional - Manaus Empregos</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; 
+            --text-color: #333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: var(--text-color); padding: 20px; }
+        
+        .container-cv { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: var(--primary-color); margin-bottom: 10px; }
+        .descricao { text-align: center; margin-bottom: 30px; font-size: 16px; color: #555; }
+        
+        .aviso-pago { background-color: #e3f2fd; border-left: 4px solid var(--primary-color); padding: 15px; margin-bottom: 25px; border-radius: 4px; font-weight: 500; color: #0056b3; }
+
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; color: #444; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+        input:focus, textarea:focus { border-color: var(--primary-color); outline: none; }
+        
+        button { width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        button:hover { background-color: #128C7E; }
+
+        .voltar { display: block; text-align: center; margin-top: 20px; color: var(--primary-color); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container-cv">
+        <h1>Currículo Profissional</h1>
+        <p class="descricao">Aumente suas chances de ser contratado com um currículo formatado no padrão exigido pelas empresas.</p>
+        
+        <div class="aviso-pago">
+            💡 <strong>Como funciona:</strong> Este é um serviço pago. Você preenche seus dados básicos abaixo, o sistema enviará as informações para o nosso WhatsApp, e nós montaremos o seu currículo em PDF com design profissional!
+        </div>
+        
+        <div class="form-group">
+            <label>Qual o seu Nome Completo?</label>
+            <input type="text" id="nome" placeholder="Ex: João da Silva" required>
+        </div>
+        <div class="form-group">
+            <label>Seu Telefone / WhatsApp:</label>
+            <input type="text" id="telefone" placeholder="(92) 90000-0000" required>
+        </div>
+        <div class="form-group">
+            <label>Qual cargo você procura? (Objetivo):</label>
+            <input type="text" id="objetivo" placeholder="Ex: Auxiliar Administrativo, Vendedor...">
+        </div>
+        <div class="form-group">
+            <label>Fale um pouco sobre suas experiências anteriores:</label>
+            <textarea id="experiencia" rows="4" placeholder="Onde você já trabalhou? O que fazia?"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Escolaridade / Cursos:</label>
+            <textarea id="formacao" rows="3" placeholder="Até que ano estudou? Fez algum curso?"></textarea>
+        </div>
+
+        <!-- Botão com a cor do WhatsApp -->
+        <button onclick="enviarParaWhatsApp()">
+            📱 Solicitar Currículo pelo WhatsApp
+        </button>
+        
+        <a href="index.html" class="voltar">← Voltar para as vagas</a>
+    </div>
+
+    <script>
+        function enviarParaWhatsApp() {
+            // 1. Pega os valores preenchidos
+            const nome = document.getElementById('nome').value;
+            const telefone = document.getElementById('telefone').value;
+            const objetivo = document.getElementById('objetivo').value;
+            const experiencia = document.getElementById('experiencia').value;
+            const formacao = document.getElementById('formacao').value;
+
+            // Validação simples para exigir o nome
+            if(!nome) {
+                alert("Por favor, preencha pelo menos o seu nome!");
+                return;
+            }
+
+            // 2. Monta a mensagem formatada para o WhatsApp
+            const mensagem = `Olá, Manaus Empregos! Gostaria de contratar a criação do meu currículo.\n\n` +
+                             `*Meus Dados:*\n` +
+                             `*Nome:* ${nome}\n` +
+                             `*Contato:* ${telefone}\n` +
+                             `*Objetivo:* ${objetivo}\n\n` +
+                             `*Experiência:*\n${experiencia}\n\n` +
+                             `*Formação:*\n${formacao}\n\n` +
+                             `Aguardo o valor e as orientações para o pagamento via Pix!`;
+
+            // 3. SEU NÚMERO DE WHATSAPP (Substitua pelos seus números)
+            // Formato: 55 + DDD + Número (Sem espaços ou traços)
+            // Exemplo: 5592999999999
+            const seuNumeroWhatsApp = "5597984474188"; 
+
+            // 4. Cria o link especial do WhatsApp e redireciona o usuário
+            const linkWhatsApp = `https://wa.me/${seuNumeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+            
+            // Abre o WhatsApp em uma nova aba
+            window.open(linkWhatsApp, '_blank');
+        }
+    </script>
+</body>
+</html>
