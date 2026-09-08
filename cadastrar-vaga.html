@@ -25,6 +25,63 @@
         
         .submit-btn { background-color: #28a745; color: white; border: none; padding: 15px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.3s; }
         .submit-btn:hover { background-color: #218838; }
+
+        /* =========================================
+           AJUSTES PREMIUM PARA CELULARES
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Transforma o Menu em botões que quebram a linha suavemente */
+            .navbar ul { 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                padding: 10px 5px; 
+            }
+            .navbar ul li a { 
+                padding: 10px; 
+                font-size: 14px; 
+            }
+            .navbar ul li.dropdown .dropdown-menu {
+                position: relative; /* Evita que o menu flutue solto no celular */
+                box-shadow: none;
+                border: none;
+                border-left: 2px solid var(--primary-color);
+            }
+
+            /* 2. Ajusta o Cabeçalho */
+            header { padding: 20px 10px; }
+            header h1 { font-size: 24px; }
+            header p { font-size: 14px; }
+
+            /* 3. Arruma a Busca para empilhar Input e Botão */
+            .search-section { padding: 20px 15px; }
+            .search-section input { width: 100%; margin-bottom: 12px; }
+            .search-section button { width: 100%; margin-left: 0; }
+
+            /* 4. Joga a Barra Lateral (Sidebar) para baixo das vagas */
+            .container { 
+                grid-template-columns: 1fr; /* Muda de 2 colunas para 1 coluna */
+                gap: 20px; 
+                padding: 0 15px; 
+                margin: 20px auto;
+            }
+
+            /* 5. Ajusta os Cards de Vagas */
+            .job-card { padding: 15px; }
+            .job-header { flex-direction: column; gap: 8px; }
+            .job-title { font-size: 20px; }
+            .job-meta { flex-direction: column; gap: 5px; margin-bottom: 15px; }
+            
+            /* 6. Botão de Candidatar ocupa 100% da largura no celular */
+            .apply-btn { width: 100%; text-align: center; }
+
+            /* 7. Impede que os banners da Adsterra "estourem" a tela */
+            .ad-space { 
+                max-width: 100%; 
+                overflow: hidden; 
+                height: auto; 
+                min-height: 90px;
+            }
+        }
     </style>
 </head>
 <body>
