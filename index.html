@@ -323,9 +323,19 @@ async function carregarVagas(termoBusca = '') {
             // ANÚNCIO 3 (Intercalado no feed)
             if ((index + 1) % 2 === 0 && index !== vagas.length - 1) {
                 const adInfeed = `
-                    <div class="ad-space ad-infeed">
-                        [ANÚNCIO NO FEED]<br>Quer divulgar seu produto entre em contato na seção contato (Ex: Cursos, Preparatório para Concursos).
-                    </div>
+                    <div class="ad-space ad-sidebar">
+                <script>
+  atOptions = {
+    'key' : '96a1d10de4245cd88679884b8e0e098c',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/96a1d10de4245cd88679884b8e0e098c/invoke.js"></script>
+
+            </div>
                 `;
                 divLista.innerHTML += adInfeed;
             }
